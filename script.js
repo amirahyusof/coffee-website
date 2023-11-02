@@ -1,15 +1,22 @@
-document.addEventListener('mousemove', move);
+const moveImage = document.getElementById('move');
+const containerImage = document.querySelector('.image');
+
+
 
 function move(e) {
-    document.querySelectorAll('.move').forEach(layer => {
-        const speed = parseFloat(layer.getAttribute('data-speed'));
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
 
-        const x = (window.innerWidth - e.pageX * speed) / 120;
-        const y = (window.innerHeight - e.pageY * speed) / 120;
+    const  containerRect = containerImage.getBoundingClientRect();
+    const xOffset = mouseX - containerRect.left - Image.width / 2; 
+    const yOffset = mouseY - containerRect.top - Image.height / 2; 
 
-        layer.style.transform = `translateX(${x}px) translateY(${y}px)`;
-    });
+    Image.style.left = `${xOffset}px`;
+    Image.style.top = `${yOffset}px`;
+
 }
+
+containerImage.addEventListener('mousemove', move);
 
 
 gsap.from('.logo', {opacity:0, duration:1, delay: 2, y: 10})
